@@ -1,0 +1,7 @@
+/* Fraunces "soft": corte óptico de bajo contraste, con aire de tinta/hecho a mano.
+   Se usa con moderación (hero, títulos de sección, nombre del tour). */
+@import '@fontsource-variable/fraunces/soft.css';
+@import '@fontsource-variable/fraunces/soft-italic.css';
+
+/* Public Sans: texto de párrafo y UI, legible en mobile. */
+@import '@fontsource-variable/public-sans/wght.css';

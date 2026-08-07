@@ -1,0 +1,44 @@
+{
+  "preguntas": [
+    {
+      "pregunta": "¿Cómo puedo reservar un recorrido?",
+      "respuesta": "Podés reservar escribiéndonos por WhatsApp o a través del formulario de contacto. Te responderemos a la brevedad para confirmar disponibilidad y brindarte toda la información necesaria."
+    },
+    {
+      "pregunta": "¿Es necesario reservar con anticipación?",
+      "respuesta": "Sí. Recomendamos reservar con anticipación para asegurar tu lugar, especialmente en fines de semana, feriados o fechas de alta demanda."
+    },
+    {
+      "pregunta": "¿Los recorridos se suspenden por lluvia?",
+      "respuesta": "Solo se suspenden o reprograman cuando las condiciones climáticas impiden realizar el recorrido de manera segura o cómoda. En ese caso nos comunicamos con todos los participantes para ofrecer una nueva fecha."
+    },
+    {
+      "pregunta": "¿Los recorridos son aptos para todas las edades?",
+      "respuesta": "Sí. Están pensados para que puedan disfrutarlos personas de todas las edades. Si algún participante tiene una necesidad especial, pedimos que nos lo informe al momento de la reserva."
+    },
+    {
+      "pregunta": "¿Cuánto duran las visitas guiadas?",
+      "respuesta": "Entre 1 hora y 30 minutos y 2 horas, dependiendo del ritmo del grupo y de las consultas que surjan durante la experiencia."
+    },
+    {
+      "pregunta": "¿Dónde comienza cada recorrido?",
+      "respuesta": "Cada visita tiene un punto de encuentro específico que se informa al confirmar la reserva. Elegimos lugares de fácil acceso y bien identificables."
+    },
+    {
+      "pregunta": "¿Qué incluye el recorrido?",
+      "respuesta": "La visita guiada, el acompañamiento de una guía local, explicaciones históricas, curiosidades, recomendaciones y la posibilidad de preguntar durante todo el recorrido."
+    },
+    {
+      "pregunta": "¿Qué no está incluido?",
+      "respuesta": "Traslados, comidas, bebidas y entradas a museos o espacios con costo adicional, salvo que se indique expresamente en un recorrido especial."
+    },
+    {
+      "pregunta": "¿Se pueden contratar recorridos privados?",
+      "respuesta": "Sí. Organizamos recorridos privados para parejas, familias, grupos de amigos, empresas, instituciones educativas y contingentes. También diseñamos experiencias personalizadas."
+    },
+    {
+      "pregunta": "¿Cómo puedo pagar?",
+      "respuesta": "Aceptamos efectivo, transferencia bancaria y Mercado Pago. Si necesitás otra modalidad, consultanos."
+    }
+  ]
+}

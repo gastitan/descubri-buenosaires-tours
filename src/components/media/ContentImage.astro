@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImage } from '../../lib/images';
+import PlaceholderImage from './PlaceholderImage.astro';
+
+interface Props {
+  /** Nombre de archivo tal como aparece en el JSON, ej. "la-boca.jpg" — sin ruta. */
+  src: string;
+  /** Carpeta física dentro de src/assets/img/ que le corresponde a este tipo de foto. */
+  carpeta?: 'tours' | '';
+  alt: string;
+  width: number;
+  height: number;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+const { src, carpeta = '', alt, width, height, loading = 'lazy', class: className } = Astro.props;
+const asset = resolveImage(src, carpeta);
+---
+
+{
+  asset ? (
+    <Image
+      src={asset}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      format="avif"
+      widths={[width, width * 1.5, width * 2]}
+      class={className}
+    />
+  ) : (
+    <PlaceholderImage alt={alt} width={width} height={height} class={className} />
+  )
+}

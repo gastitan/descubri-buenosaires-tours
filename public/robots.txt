@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://descubribuenosairestours.com.ar/sitemap-index.xml

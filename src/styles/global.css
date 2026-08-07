@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+@theme {
+  /* Paleta — ver plan de diseño. El ocre nunca es color de texto sobre fondo claro. */
+  --color-azul-tinta: #1c2b45;
+  --color-azul-grafito: #33475b;
+  --color-ocre: #c7973e;
+  --color-arena: #f4e9ce;
+  --color-blanco: #fbf8f3;
+  --color-piedra: #64707f;
+
+  /* Única excepción a la paleta: botones/CTAs de WhatsApp. */
+  --color-whatsapp: #146c43;
+  --color-whatsapp-acento: #25d366;
+
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-blanco);
+    color: var(--color-azul-tinta);
+    font-family: var(--font-sans);
+  }
+
+  /* Anillo doble (blanco + azul tinta): sea cual sea el fondo detrás del elemento
+     enfocado —claro, oscuro, o la foto del hero— al menos uno de los dos aros
+     contrasta lo suficiente (WCAG 1.4.11, contraste no-textual). */
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--color-blanco),
+      0 0 0 4px var(--color-azul-tinta);
+    border-radius: 2px;
+  }
+}

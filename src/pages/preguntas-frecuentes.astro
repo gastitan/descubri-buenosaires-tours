@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqItem from '../components/FaqItem.astro';
+import { getFaqData, getPoliticasData } from '../lib/content';
+import { ui } from '../i18n/es';
+
+const preguntas = await getFaqData();
+const politicas = await getPoliticasData();
+---
+
+<BaseLayout
+  title={ui.faq.titulo}
+  description="Cómo reservar, políticas de cancelación y clima, medios de pago y todo lo que necesitás saber antes de la visita."
+>
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="font-display text-3xl font-semibold text-azul-tinta md:text-4xl">{ui.faq.titulo}</h1>
+
+    <div class="mt-8 flex flex-col gap-3">
+      {preguntas.map((p) => <FaqItem pregunta={p.pregunta} respuesta={p.respuesta} />)}
+    </div>
+
+    <h2 class="mt-12 font-display text-2xl font-semibold text-azul-tinta">Políticas</h2>
+    <dl class="mt-4 flex flex-col gap-4 text-azul-grafito">
+      <div>
+        <dt class="font-semibold text-azul-tinta">Reprogramación</dt>
+        <dd class="mt-1">{politicas.reprogramacion}</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-azul-tinta">Clima</dt>
+        <dd class="mt-1">{politicas.clima}</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-azul-tinta">Cancelación</dt>
+        <dd class="mt-1">{politicas.cancelacion}</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-azul-tinta">Seguridad</dt>
+        <dd class="mt-1">{politicas.seguridad}</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-azul-tinta">Medios de pago</dt>
+        <dd class="mt-1">
+          <ul class="list-inside list-disc">
+            {politicas.mediosDePago.map((medio) => <li>{medio}</li>)}
+          </ul>
+        </dd>
+      </div>
+    </dl>
+  </section>
+</BaseLayout>

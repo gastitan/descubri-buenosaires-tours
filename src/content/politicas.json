@@ -1,0 +1,12 @@
+{
+  "reprogramacion": "Las reservas pueden reprogramarse avisando con al menos 24 horas de anticipación.",
+  "clima": "Ante lluvia intensa, alertas meteorológicas o condiciones que afecten el normal desarrollo de la actividad, el recorrido puede reprogramarse sin costo adicional.",
+  "cancelacion": "Si la cancelación es del pasajero fuera del plazo establecido, la seña puede no reintegrarse. Cada situación se evalúa buscando la mejor solución para ambas partes.",
+  "seguridad": "Los recorridos respetan las normas de seguridad y circulación de la Ciudad. Se pide a cada participante seguir las indicaciones de la guía y avisar previamente cualquier condición física o necesidad especial.",
+  "mediosDePago": [
+    "Efectivo en pesos",
+    "Transferencia bancaria",
+    "Mercado Pago",
+    "Dólares, coordinándolo previamente"
+  ]
+}

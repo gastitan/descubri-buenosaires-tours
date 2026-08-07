@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import SeoHead from '../components/seo/SeoHead.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WhatsAppFloating from '../components/whatsapp/WhatsAppFloating.astro';
+import { getSiteData } from '../lib/content';
+import { buildLocalBusinessSchema } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  mensajeWhatsapp?: string;
+  jsonLdExtra?: Record<string, unknown>;
+}
+const { title, description, image, mensajeWhatsapp, jsonLdExtra } = Astro.props;
+
+const site = await getSiteData();
+const localBusinessSchema = buildLocalBusinessSchema(site);
+---
+
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <SeoHead title={title} description={description} image={image} />
+    <JsonLd data={localBusinessSchema} />
+    {jsonLdExtra && <JsonLd data={jsonLdExtra} />}
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#contenido"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-blanco focus-visible:px-4 focus-visible:py-2 focus-visible:text-azul-tinta"
+    >
+      Saltar al contenido
+    </a>
+    <SiteHeader />
+    <main id="contenido" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <WhatsAppFloating mensaje={mensajeWhatsapp} />
+  </body>
+</html>

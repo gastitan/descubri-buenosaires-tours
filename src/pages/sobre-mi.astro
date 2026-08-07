@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentImage from '../components/media/ContentImage.astro';
+import WhatsAppCta from '../components/whatsapp/WhatsAppCta.astro';
+import { getSiteData, getSobreData } from '../lib/content';
+import { mensajeGenerico } from '../lib/whatsapp';
+import { ui } from '../i18n/es';
+
+const site = await getSiteData();
+const sobre = await getSobreData();
+---
+
+<BaseLayout
+  title={ui.sobreMi.titulo}
+  description={`${sobre.nombre}, ${sobre.credencial.toLowerCase()} y guía de Descubrí Buenos Aires Tours.`}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <ContentImage
+      src={sobre.foto}
+      alt={sobre.fotoAlt}
+      width={480}
+      height={480}
+      loading="eager"
+      class="aspect-square w-full max-w-sm rounded-xl object-cover"
+    />
+
+    <h1 class="mt-6 font-display text-3xl font-semibold text-azul-tinta md:text-4xl">
+      {ui.sobreMi.titulo}
+    </h1>
+    <p class="mt-1 text-sm font-semibold text-azul-grafito">{sobre.credencial}</p>
+
+    <div class="prose prose-p:text-azul-grafito mt-6 max-w-none">
+      {sobre.parrafos.map((parrafo) => <p>{parrafo}</p>)}
+    </div>
+
+    <div class="mt-8">
+      <WhatsAppCta mensaje={mensajeGenerico(site.marca.nombre)} label={ui.whatsapp.ctaGenerico} />
+    </div>
+  </article>
+</BaseLayout>

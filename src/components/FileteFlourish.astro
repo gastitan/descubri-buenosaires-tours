@@ -1,0 +1,38 @@
+---
+/**
+ * Motivo ornamental inspirado en el filete porteño. Se usa en exactamente dos
+ * lugares del sitio (separador entre secciones de la home, acento junto a
+ * "Agenda de la semana") — a propósito, no se repite como patrón decorativo.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 300 40"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  class:list={['filete-flourish', className]}
+>
+  <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M20,20 C 45,6 55,34 80,20 C 100,9 110,31 132,20" />
+    <path d="M280,20 C 255,6 245,34 220,20 C 200,9 190,31 168,20" />
+    <path d="M20,20 C14,17 12,23 16,26 C20,29 24,23 20,20" />
+    <path d="M280,20 C286,17 288,23 284,26 C280,29 276,23 280,20" />
+  </g>
+  <rect x="145" y="12" width="10" height="10" fill="currentColor" transform="rotate(45 150 17)" />
+  <circle cx="138" cy="20" r="2.2" fill="currentColor" />
+  <circle cx="162" cy="20" r="2.2" fill="currentColor" />
+</svg>
+
+<style>
+  .filete-flourish {
+    width: 100%;
+    max-width: 14rem;
+    height: auto;
+    color: var(--color-ocre);
+  }
+</style>

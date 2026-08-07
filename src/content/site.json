@@ -1,0 +1,30 @@
+{
+  "marca": {
+    "nombre": "Descubrí Buenos Aires Tours",
+    "responsable": "Vanesa Gercehegushian, Licenciada en Turismo",
+    "lema": "Cada rincón tiene una historia"
+  },
+  "contacto": {
+    "whatsapp": {
+      "numero": "5491139251624",
+      "numeroVisible": "+54 9 11 3925-1624"
+    },
+    "email": null
+  },
+  "redes": {
+    "instagram": {
+      "usuario": "@descubribuenosaires.tours",
+      "url": "https://www.instagram.com/descubribuenosaires.tours/"
+    },
+    "facebook": {
+      "nombre": "Descubrí Buenos Aires Tours",
+      "url": null
+    }
+  },
+  "horarioAtencion": {
+    "texto": "Todos los días, de 9:00 a 20:00",
+    "desde": "09:00",
+    "hasta": "20:00"
+  },
+  "dominio": "descubribuenosairestours.com.ar"
+}

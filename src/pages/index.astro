@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentImage from '../components/media/ContentImage.astro';
+import WhatsAppCta from '../components/whatsapp/WhatsAppCta.astro';
+import AgendaSemanal from '../components/AgendaSemanal.astro';
+import FileteFlourish from '../components/FileteFlourish.astro';
+import TourCard from '../components/TourCard.astro';
+import ServicioCard from '../components/ServicioCard.astro';
+import FaqItem from '../components/FaqItem.astro';
+import { getSiteData, getSobreData, getServiciosData, getFaqData, getToursOrdenados } from '../lib/content';
+import { mensajeGenerico } from '../lib/whatsapp';
+import { ui } from '../i18n/es';
+
+const site = await getSiteData();
+const sobre = await getSobreData();
+const servicios = await getServiciosData();
+const preguntas = (await getFaqData()).slice(0, 4);
+const tours = await getToursOrdenados();
+---
+
+<BaseLayout
+  title={site.marca.nombre}
+  description={`${site.marca.lema} — recorridos guiados a pie por Buenos Aires, con agenda semanal fija.`}
+>
+  <section class="relative flex min-h-[85vh] items-end overflow-hidden">
+    <ContentImage
+      src="hero.jpg"
+      alt="Vista de una calle emblemática de Buenos Aires durante un recorrido guiado"
+      width={1600}
+      height={2000}
+      loading="eager"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-azul-tinta/90 via-azul-tinta/40 to-transparent"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-4 pb-36 text-blanco md:pb-10">
+      <h1 class="font-display text-3xl font-semibold md:text-5xl">{site.marca.nombre}</h1>
+      <p class="mt-2 font-display text-lg italic text-arena md:text-2xl">{site.marca.lema}</p>
+      <div class="mt-6">
+        <WhatsAppCta mensaje={mensajeGenerico(site.marca.nombre)} label={ui.whatsapp.ctaGenerico} />
+      </div>
+    </div>
+  </section>
+
+  <AgendaSemanal tours={tours} />
+
+  <section aria-labelledby="tours-titulo" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 id="tours-titulo" class="font-display text-2xl font-semibold text-azul-tinta md:text-3xl">
+      Los siete recorridos
+    </h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {tours.map((tour) => <TourCard tour={tour} />)}
+    </div>
+  </section>
+
+  <div class="flex justify-center py-4" role="separator">
+    <FileteFlourish />
+  </div>
+
+  <section aria-labelledby="sobre-titulo" class="mx-auto max-w-6xl px-4 py-12">
+    <div class="grid gap-6 md:grid-cols-[1fr_1.5fr] md:items-center">
+      <ContentImage
+        src={sobre.foto}
+        alt={sobre.fotoAlt}
+        width={480}
+        height={480}
+        class="aspect-square w-full max-w-sm rounded-xl object-cover"
+      />
+      <div>
+        <h2 id="sobre-titulo" class="font-display text-2xl font-semibold text-azul-tinta md:text-3xl">
+          {ui.sobreMi.titulo}
+        </h2>
+        <p class="mt-2 text-sm font-semibold text-azul-grafito">{sobre.credencial}</p>
+        <p class="mt-4 text-azul-grafito">Soy {sobre.nombre}. {sobre.parrafos[0]}</p>
+        <a
+          href="/sobre-mi"
+          class="mt-4 inline-block text-sm font-semibold text-azul-tinta underline-offset-4 hover:underline"
+        >
+          Conocé mi historia completa →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="servicios-titulo" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 id="servicios-titulo" class="font-display text-2xl font-semibold text-azul-tinta md:text-3xl">
+      {ui.servicios.titulo}
+    </h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {servicios.map((servicio) => <ServicioCard nombre={servicio.nombre} descripcion={servicio.descripcion} />)}
+    </div>
+    <a
+      href="/servicios"
+      class="mt-4 inline-block text-sm font-semibold text-azul-tinta underline-offset-4 hover:underline"
+    >
+      Ver todos los servicios →
+    </a>
+  </section>
+
+  <section aria-labelledby="faq-titulo" class="mx-auto max-w-6xl px-4 py-12">
+    <h2 id="faq-titulo" class="font-display text-2xl font-semibold text-azul-tinta md:text-3xl">
+      {ui.faq.titulo}
+    </h2>
+    <div class="mt-6 flex flex-col gap-3">
+      {preguntas.map((p) => <FaqItem pregunta={p.pregunta} respuesta={p.respuesta} />)}
+    </div>
+    <a
+      href="/preguntas-frecuentes"
+      class="mt-4 inline-block text-sm font-semibold text-azul-tinta underline-offset-4 hover:underline"
+    >
+      {ui.faq.verTodas} →
+    </a>
+  </section>
+
+  <!--
+    Testimonios: todavía no hay ninguno (brief, sección 11 — no inventar). Cuando lleguen reseñas
+    reales, agregar una colección `testimonios` (mismo patrón que `tours`) y una sección acá,
+    entre "Servicios" y "FAQ".
+  -->
+</BaseLayout>

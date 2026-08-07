@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "slug": "privados",
+      "nombre": "Recorridos privados",
+      "descripcion": "Armo el recorrido para tu grupo solo, sin sumarte a otros pasajeros: para parejas, familias o grupos de amigos que prefieren ir a su propio ritmo. Elegimos juntos el día, el horario y hasta el barrio, dentro de los siete recorridos o combinando más de uno."
+    },
+    {
+      "slug": "educativos",
+      "nombre": "Visitas educativas",
+      "descripcion": "Diseñamos recorridos pensados para grupos escolares y universitarios, con foco en historia, patrimonio y contexto social de cada barrio. Coordinamos horarios y contenidos con la institución antes de la visita."
+    },
+    {
+      "slug": "empresas",
+      "nombre": "Actividades para empresas",
+      "descripcion": "Organizamos salidas grupales para equipos de trabajo, como actividad de team building o como parte de un programa de bienvenida para colaboradores que llegan de otras ciudades o países. Se coordina a medida con cada empresa."
+    },
+    {
+      "slug": "city-tours",
+      "nombre": "City tours",
+      "descripcion": "Si tenés poco tiempo en Buenos Aires, armo un recorrido combinando caminata y traslados para ver varios puntos de la ciudad en una sola salida."
+    },
+    {
+      "slug": "personalizados",
+      "nombre": "Experiencias personalizadas",
+      "descripcion": "Contame qué te interesa —arquitectura, historia, gastronomía, arte— y armo un recorrido que no está en la lista de siempre, adaptado a tus tiempos y a lo que quieras conocer."
+    }
+  ]
+}

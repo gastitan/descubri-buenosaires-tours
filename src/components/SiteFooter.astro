@@ -1,0 +1,62 @@
+---
+import { getSiteData } from '../lib/content';
+import { whatsappLink, mensajeGenerico } from '../lib/whatsapp';
+import { ui } from '../i18n/es';
+
+const site = await getSiteData();
+const hrefWhatsapp = whatsappLink(site.contacto.whatsapp.numero, mensajeGenerico(site.marca.nombre));
+---
+
+<footer class="mt-16 border-t border-piedra/20 bg-azul-tinta text-blanco">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+    <div>
+      <p class="font-display text-lg font-semibold">{site.marca.nombre}</p>
+      <p class="mt-2 text-sm text-blanco/80">{site.marca.lema}</p>
+    </div>
+
+    <div class="text-sm">
+      <p class="font-semibold">Contacto</p>
+      <ul class="mt-2 space-y-1 text-blanco/80">
+        <li>
+          <a href={hrefWhatsapp} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
+            WhatsApp: {site.contacto.whatsapp.numeroVisible}
+          </a>
+        </li>
+        <li>
+          {site.contacto.email ? (
+            <a href={`mailto:${site.contacto.email}`} class="hover:text-blanco">
+              {site.contacto.email}
+            </a>
+          ) : (
+            <span>Mail: TODO</span>
+          )}
+        </li>
+        <li>{site.horarioAtencion.texto}</li>
+      </ul>
+    </div>
+
+    <div class="text-sm">
+      <p class="font-semibold">Redes</p>
+      <ul class="mt-2 space-y-1 text-blanco/80">
+        <li>
+          <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
+            {ui.footer.instagram}
+          </a>
+        </li>
+        <li>
+          {site.redes.facebook.url ? (
+            <a href={site.redes.facebook.url} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
+              {ui.footer.facebook}
+            </a>
+          ) : (
+            <span>Facebook: {site.redes.facebook.nombre} (URL: TODO)</span>
+          )}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="border-t border-blanco/10 px-4 py-4 text-center text-xs text-blanco/60">
+    © {new Date().getFullYear()} {site.marca.nombre} — {site.marca.responsable}
+  </p>
+</footer>

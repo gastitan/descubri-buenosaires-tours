@@ -1,0 +1,62 @@
+---
+import { getSiteData } from '../lib/content';
+import { ui } from '../i18n/es';
+
+const site = await getSiteData();
+
+const enlaces = [
+  { href: '/', label: ui.nav.inicio },
+  { href: '/#agenda', label: ui.nav.tours },
+  { href: '/sobre-mi', label: ui.nav.sobreMi },
+  { href: '/servicios', label: ui.nav.servicios },
+  { href: '/preguntas-frecuentes', label: ui.nav.faq },
+  { href: '/contacto', label: ui.nav.contacto },
+];
+---
+
+<header class="sticky top-0 z-30 border-b border-piedra/20 bg-blanco/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="font-display text-lg font-semibold text-azul-tinta">
+      {site.marca.nombre}
+    </a>
+
+    <details class="nav-toggle relative md:contents">
+      <summary
+        class="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 font-sans text-sm font-semibold text-azul-tinta md:hidden"
+      >
+        Menú
+        <span class="nav-toggle__icono" aria-hidden="true">▾</span>
+      </summary>
+      <nav
+        aria-label="Principal"
+        class="absolute right-0 top-full flex w-56 flex-col gap-1 rounded-lg border border-piedra/20 bg-blanco p-2 shadow-md md:static md:w-auto md:flex-row md:items-center md:gap-6 md:border-none md:bg-transparent md:p-0 md:shadow-none"
+      >
+        {
+          enlaces.map((enlace) => (
+            <a
+              href={enlace.href}
+              class="rounded-md px-3 py-2 font-sans text-sm text-azul-grafito hover:text-azul-tinta md:px-0 md:py-0"
+            >
+              {enlace.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .nav-toggle__icono {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .nav-toggle[open] .nav-toggle__icono {
+    transform: rotate(180deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle__icono {
+      transition: none;
+    }
+  }
+</style>
