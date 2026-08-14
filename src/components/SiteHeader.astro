@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/img/logo.png';
 import { getSiteData } from '../lib/content';
 import { ui } from '../i18n/es';
 
@@ -16,8 +18,8 @@ const enlaces = [
 
 <header class="sticky top-0 z-30 border-b border-piedra/20 bg-blanco/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-    <a href="/" class="font-display text-lg font-semibold text-azul-tinta">
-      {site.marca.nombre}
+    <a href="/" class="shrink-0">
+      <Image src={logo} alt={`${site.marca.nombre} — ${site.marca.lema}`} width={200} height={201} loading="eager" class="h-12 w-auto sm:h-14" />
     </a>
 
     <details class="nav-toggle relative md:contents">

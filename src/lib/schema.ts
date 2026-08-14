@@ -22,7 +22,7 @@ export function buildTouristTripSchema(tour: Tour, site: Site, urlAbsoluta: stri
   };
 }
 
-export function buildLocalBusinessSchema(site: Site) {
+export function buildLocalBusinessSchema(site: Site, logoUrl?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -31,6 +31,7 @@ export function buildLocalBusinessSchema(site: Site) {
     description: site.marca.lema,
     telephone: `+${site.contacto.whatsapp.numero}`,
     url: `https://${site.dominio}/`,
+    ...(logoUrl && { logo: logoUrl, image: logoUrl }),
     areaServed: 'Ciudad Autónoma de Buenos Aires, Argentina',
     sameAs: [site.redes.instagram.url, site.redes.facebook.url].filter(Boolean),
     openingHoursSpecification: {

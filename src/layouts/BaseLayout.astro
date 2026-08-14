@@ -1,10 +1,12 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import SeoHead from '../components/seo/SeoHead.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import WhatsAppFloating from '../components/whatsapp/WhatsAppFloating.astro';
+import logo from '../assets/img/logo.png';
 import { getSiteData } from '../lib/content';
 import { buildLocalBusinessSchema } from '../lib/schema';
 
@@ -18,7 +20,8 @@ interface Props {
 const { title, description, image, mensajeWhatsapp, jsonLdExtra } = Astro.props;
 
 const site = await getSiteData();
-const localBusinessSchema = buildLocalBusinessSchema(site);
+const logoUrl = new URL((await getImage({ src: logo })).src, Astro.site).toString();
+const localBusinessSchema = buildLocalBusinessSchema(site, logoUrl);
 ---
 
 <html lang="es-AR">

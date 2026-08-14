@@ -37,7 +37,9 @@ Mismo criterio: se edita el texto entre comillas, sin tocar las comillas ni las 
 
 ### Fotos
 
-Todavía no hay ninguna foto real cargada — el sitio muestra un recuadro con rayas y el texto "Foto pendiente" en su lugar, a propósito, para que sea fácil ver dónde falta cada una.
+Todavía no hay fotos reales de los recorridos ni de Vanesa — el sitio muestra un recuadro con rayas y el texto "Foto pendiente" en su lugar, a propósito, para que sea fácil ver dónde falta cada una.
+
+La única excepción es `hero.png`: es una foto de stock puesta como placeholder temporal (el brief pide expresamente no usar fotos de banco — "son recorridos reales, van fotos reales"), marcada con un cartel visible de "Foto provisoria (TODO)" arriba a la izquierda del hero. **Hay que reemplazarla por una foto real antes de publicar** — cuando la tengas, seguí el mismo criterio que las demás (mismo nombre de archivo, `hero.png` o `hero.jpg`, en `src/assets/img/`) y sacá el cartel de "Foto provisoria" de `src/pages/index.astro`.
 
 Cuando tengas las fotos:
 
@@ -45,11 +47,11 @@ Cuando tengas las fotos:
 2. Usá exactamente el mismo nombre de archivo que ya está escrito en el JSON correspondiente (por ejemplo, si `tours.json` dice `"imagen": "la-boca.jpg"`, el archivo tiene que llamarse `la-boca.jpg`).
 3. No hace falta cambiar nada más — el recuadro de "Foto pendiente" desaparece solo y aparece la foto real, ya optimizada.
 
-Fotos que faltan: `hero.jpg` (portada), `vanesa.jpg` (Sobre mí) y una por cada uno de los siete recorridos.
+Fotos que faltan: `hero.png` (portada, ver nota arriba) y `vanesa.jpg` (Sobre mí). Los siete recorridos ya tienen foto.
 
 ### Logo
 
-Todavía no hay logo. Mientras tanto, el sitio muestra el nombre de la marca en texto. Cuando tengas el archivo (PNG con fondo transparente o SVG), pedí que lo incorporen al encabezado.
+Ya está cargado (`src/assets/img/logo.png`), en el encabezado y en el pie de página. El archivo que llegó tiene fondo blanco opaco, no transparente — por eso en el footer (fondo azul oscuro) va dentro de una tarjeta blanca redondeada, para que no se vea un cuadrado blanco suelto. Si en algún momento conseguís una versión con fondo transparente (PNG o SVG), es un simple reemplazo del archivo y se puede sacar esa tarjeta blanca del footer.
 
 ---
 
