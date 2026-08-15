@@ -19,7 +19,16 @@ const enlaces = [
 <header class="sticky top-0 z-30 border-b border-piedra/20 bg-blanco/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
     <a href="/" class="shrink-0">
-      <Image src={logo} alt={`${site.marca.nombre} — ${site.marca.lema}`} width={200} height={201} loading="eager" class="h-12 w-auto sm:h-14" />
+      <Image
+        src={logo}
+        alt={site.marca.nombre}
+        width={72}
+        height={72}
+        densities={[1, 2]}
+        loading="eager"
+        fetchpriority="high"
+        class="h-16 w-auto sm:h-[72px]"
+      />
     </a>
 
     <details class="nav-toggle relative md:contents">
