@@ -17,7 +17,7 @@ const enlaces = [
 ---
 
 <header class="sticky top-0 z-30 border-b border-piedra/20 bg-blanco/95 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+  <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
     <a href="/" class="shrink-0">
       <Image
         src={logo}
@@ -31,29 +31,30 @@ const enlaces = [
       />
     </a>
 
-    <details class="nav-toggle relative md:contents">
+    <details class="nav-toggle md:hidden">
       <summary
-        class="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 font-sans text-sm font-semibold text-azul-tinta md:hidden"
+        class="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 font-sans text-sm font-semibold text-azul-tinta"
       >
         Menú
         <span class="nav-toggle__icono" aria-hidden="true">▾</span>
       </summary>
-      <nav
-        aria-label="Principal"
-        class="absolute right-0 top-full flex w-56 flex-col gap-1 rounded-lg border border-piedra/20 bg-blanco p-2 shadow-md md:static md:w-auto md:flex-row md:items-center md:gap-6 md:border-none md:bg-transparent md:p-0 md:shadow-none"
-      >
-        {
-          enlaces.map((enlace) => (
-            <a
-              href={enlace.href}
-              class="rounded-md px-3 py-2 font-sans text-sm text-azul-grafito hover:text-azul-tinta md:px-0 md:py-0"
-            >
-              {enlace.label}
-            </a>
-          ))
-        }
-      </nav>
     </details>
+
+    <nav
+      aria-label="Principal"
+      class="nav-links absolute right-4 top-full hidden w-56 flex-col gap-1 rounded-lg border border-piedra/20 bg-blanco p-2 shadow-md md:static md:right-auto md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:border-none md:bg-transparent md:p-0 md:shadow-none"
+    >
+      {
+        enlaces.map((enlace) => (
+          <a
+            href={enlace.href}
+            class="rounded-md px-3 py-2 font-sans text-sm text-azul-grafito hover:text-azul-tinta md:px-0 md:py-0"
+          >
+            {enlace.label}
+          </a>
+        ))
+      }
+    </nav>
   </div>
 </header>
 
@@ -64,6 +65,12 @@ const enlaces = [
   }
   .nav-toggle[open] .nav-toggle__icono {
     transform: rotate(180deg);
+  }
+  /* Los navegadores ocultan el contenido de un <details> cerrado aunque se le
+     ponga display:contents; por eso el nav vive afuera, como hermano, y se
+     muestra a mano según el estado [open]. */
+  .nav-toggle[open] + .nav-links {
+    display: flex;
   }
   @media (prefers-reduced-motion: reduce) {
     .nav-toggle__icono {
