@@ -37,21 +37,21 @@ Mismo criterio: se edita el texto entre comillas, sin tocar las comillas ni las 
 
 ### Fotos
 
-Todavía no hay fotos reales de los recorridos ni de Vanesa — el sitio muestra un recuadro con rayas y el texto "Foto pendiente" en su lugar, a propósito, para que sea fácil ver dónde falta cada una.
+Los siete recorridos, la foto de Vanesa (Sobre mí) y la foto de portada (`hero.png`, el Obelisco) ya están cargadas en `src/assets/img/`. Si en algún momento falta alguna (por ejemplo al agregar un octavo recorrido), el sitio muestra automáticamente un recuadro con rayas y el texto "Foto pendiente" en su lugar, a propósito, para que sea fácil ver dónde falta.
 
-La única excepción es `hero.png`: es una foto de stock puesta como placeholder temporal (el brief pide expresamente no usar fotos de banco — "son recorridos reales, van fotos reales"), marcada con un cartel visible de "Foto provisoria (TODO)" arriba a la izquierda del hero. **Hay que reemplazarla por una foto real antes de publicar** — cuando la tengas, seguí el mismo criterio que las demás (mismo nombre de archivo, `hero.png` o `hero.jpg`, en `src/assets/img/`) y sacá el cartel de "Foto provisoria" de `src/pages/index.astro`.
+Para agregar o reemplazar una foto:
 
-Cuando tengas las fotos:
-
-1. Guardalas en `src/assets/img/` (las de cada recorrido, dentro de `src/assets/img/tours/`).
+1. Guardala en `src/assets/img/` (las de cada recorrido, dentro de `src/assets/img/tours/`).
 2. Usá exactamente el mismo nombre de archivo que ya está escrito en el JSON correspondiente (por ejemplo, si `tours.json` dice `"imagen": "la-boca.jpg"`, el archivo tiene que llamarse `la-boca.jpg`).
 3. No hace falta cambiar nada más — el recuadro de "Foto pendiente" desaparece solo y aparece la foto real, ya optimizada.
 
-Fotos que faltan: `hero.png` (portada, ver nota arriba) y `vanesa.jpg` (Sobre mí). Los siete recorridos ya tienen foto.
+`hero.png` es una foto de stock (el brief pide expresamente no usar fotos de banco para los recorridos — "son recorridos reales, van fotos reales" — pero para la portada se aceptó como solución temporal). Hoy se usa como fondo de la sección principal de la home, detrás del título y la tarjeta de "Próximas salidas", con un degradé para que el texto se siga leyendo bien. Cuando haya una foto real para reemplazarla, seguí el mismo criterio que las demás: mismo nombre de archivo (`hero.png` o `hero.jpg`) en `src/assets/img/`, sin tocar el código.
 
 ### Logo
 
-Ya está cargado (`src/assets/img/logo.png`), en el encabezado y en el pie de página. El archivo que llegó tiene fondo blanco opaco, no transparente — por eso en el footer (fondo azul oscuro) va dentro de una tarjeta blanca redondeada, para que no se vea un cuadrado blanco suelto. Si en algún momento conseguís una versión con fondo transparente (PNG o SVG), es un simple reemplazo del archivo y se puede sacar esa tarjeta blanca del footer.
+Ya está cargado (`src/assets/img/logo.png`), en el encabezado y en el pie de página. El archivo real mide 399×321px (no es cuadrado) — por eso en el código se le pide a Astro que lo genere respetando esa proporción (`width={133} height={107}` o equivalente); si se le pidiera un tamaño cuadrado, Astro lo recortaría al centro y cortaría el texto de los bordes.
+
+El archivo que llegó tiene fondo blanco opaco, no transparente. El encabezado tiene fondo azul oscuro, así que ahí el logo va dentro de una tarjeta blanca redondeada para que no se vea un cuadrado blanco suelto; el pie de página en cambio tiene fondo claro, así que ahí el logo va directo, sin tarjeta. Si en algún momento conseguís una versión con fondo transparente (PNG o SVG), es un simple reemplazo del archivo y se puede sacar esa tarjeta blanca del encabezado.
 
 ---
 
@@ -63,6 +63,7 @@ Ya está cargado (`src/assets/img/logo.png`), en el encabezado y en el pie de p�
 - Contenido validado con [Zod](https://zod.dev) a través de Astro Content Collections (`src/content.config.ts`) — un JSON mal formado rompe `npm run build` con un error legible, no rompe el sitio publicado.
 - Cero JavaScript de cliente. Las únicas interacciones (menú mobile, acordeón de FAQ) usan `<details>/<summary>` nativo de HTML, sin scripts. Las únicas etiquetas `<script>` del sitio son bloques `application/ld+json` (datos estructurados para buscadores) — el navegador no las ejecuta como código, así que no cuentan como JavaScript de cliente.
 - Fuentes self-hosteadas vía `@fontsource-variable` (Fraunces "soft" para títulos, Public Sans para texto), sin CDN externo.
+- Encabezado (fondo azul oscuro) y pie de página (fondo claro, una sola línea) son compartidos por todas las páginas (`SiteHeader.astro` / `SiteFooter.astro`). La home (`src/pages/index.astro`) tiene su propia estructura de secciones: hero con la foto de portada de fondo + tarjeta "Próximas salidas" (`AgendaSemanal.astro`), grilla de los siete recorridos, "Sobre mí", servicios y FAQ + CTA de WhatsApp.
 
 ### Comandos
 
@@ -105,4 +106,4 @@ Todavía no hay ninguno (no se inventaron, a propósito). Hay un comentario en `
 
 ### Cosas marcadas como `TODO`
 
-Buscá la palabra `TODO` en `src/content/*.json` y en este README para encontrar todo lo que falta: mail de contacto, URL de Facebook, punto de encuentro y precio de cada recorrido, fotos, logo, revisión de los textos de los siete recorridos, y la historia de "Sobre mí".
+Buscá la palabra `TODO` en `src/content/*.json` para encontrar todo lo que falta: mail de contacto, URL de Facebook, punto de encuentro y precio de cada recorrido, revisión de los textos de los siete recorridos, y la historia de "Sobre mí".
