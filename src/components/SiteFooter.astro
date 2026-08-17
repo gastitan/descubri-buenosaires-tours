@@ -9,58 +9,49 @@ const site = await getSiteData();
 const hrefWhatsapp = whatsappLink(site.contacto.whatsapp.numero, mensajeGenerico(site.marca.nombre));
 ---
 
-<footer class="mt-16 border-t border-piedra/20 bg-azul-tinta text-blanco">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
-    <div>
-      <div class="inline-block rounded-lg bg-blanco p-2">
-        <Image src={logo} alt={`${site.marca.nombre} — ${site.marca.lema}`} width={200} height={201} class="h-16 w-auto" />
+<footer class="mt-16 border-t border-piedra/20 bg-blanco">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-3">
+      <Image src={logo} alt={site.marca.nombre} width={133} height={107} class="h-10 w-auto" />
+      <div class="text-sm">
+        <p class="font-semibold text-azul-tinta">{site.marca.nombre}</p>
+        <p class="text-azul-grafito">{site.marca.lema}</p>
       </div>
-      <p class="mt-3 text-sm text-blanco/80">{site.marca.lema}</p>
     </div>
 
-    <div class="text-sm">
-      <p class="font-semibold">Contacto</p>
-      <ul class="mt-2 space-y-1 text-blanco/80">
-        <li>
-          <a href={hrefWhatsapp} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
-            WhatsApp: {site.contacto.whatsapp.numeroVisible}
-          </a>
-        </li>
-        <li>
-          {site.contacto.email ? (
-            <a href={`mailto:${site.contacto.email}`} class="hover:text-blanco">
-              {site.contacto.email}
-            </a>
-          ) : (
-            <span>Mail: TODO</span>
-          )}
-        </li>
-        <li>{site.horarioAtencion.texto}</li>
-      </ul>
-    </div>
-
-    <div class="text-sm">
-      <p class="font-semibold">Redes</p>
-      <ul class="mt-2 space-y-1 text-blanco/80">
-        <li>
-          <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
-            {ui.footer.instagram}
-          </a>
-        </li>
-        <li>
-          {site.redes.facebook.url ? (
-            <a href={site.redes.facebook.url} target="_blank" rel="noopener noreferrer" class="hover:text-blanco">
-              {ui.footer.facebook}
-            </a>
-          ) : (
-            <span>Facebook: {site.redes.facebook.nombre} (URL: TODO)</span>
-          )}
-        </li>
-      </ul>
-    </div>
+    <nav aria-label="Pie de página" class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-azul-grafito">
+      <a href="/#recorridos" class="hover:text-azul-tinta">{ui.nav.tours}</a>
+      <a href="/servicios" class="hover:text-azul-tinta">{ui.nav.servicios}</a>
+      <a href="/preguntas-frecuentes" class="hover:text-azul-tinta">{ui.nav.faq}</a>
+      <a href="/contacto" class="hover:text-azul-tinta">{ui.nav.contacto}</a>
+      <a href={hrefWhatsapp} target="_blank" rel="noopener noreferrer" class="font-semibold text-azul-tinta hover:underline">
+        WhatsApp
+      </a>
+    </nav>
   </div>
 
-  <p class="border-t border-blanco/10 px-4 py-4 text-center text-xs text-blanco/60">
-    © {new Date().getFullYear()} {site.marca.nombre} — {site.marca.responsable}
-  </p>
+  <div class="border-t border-piedra/15 px-4 py-4 text-center text-xs text-piedra">
+    <p>© {new Date().getFullYear()} {site.marca.nombre} — {site.marca.responsable}</p>
+    <p class="mt-1">
+      <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="hover:text-azul-tinta">
+        {ui.footer.instagram}
+      </a>
+      {site.redes.facebook.url && (
+        <>
+          {' · '}
+          <a href={site.redes.facebook.url} target="_blank" rel="noopener noreferrer" class="hover:text-azul-tinta">
+            {ui.footer.facebook}
+          </a>
+        </>
+      )}
+      {site.contacto.email && (
+        <>
+          {' · '}
+          <a href={`mailto:${site.contacto.email}`} class="hover:text-azul-tinta">
+            {site.contacto.email}
+          </a>
+        </>
+      )}
+    </p>
+  </div>
 </footer>

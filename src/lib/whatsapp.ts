@@ -10,3 +10,11 @@ export function mensajeGenerico(marca: string): string {
 export function mensajeTour(tour: { nombre: string; dia: string }): string {
   return `Hola! Quería consultar por la visita guiada de ${tour.nombre} del día ${tour.dia}.`;
 }
+
+export function mensajeOtraFecha(): string {
+  return 'Hola! Quería consultar por otra fecha u horario para un recorrido.';
+}
+
+export function mensajeAMedida(): string {
+  return 'Hola! Quería consultar por un recorrido a medida (privado, educativo o para empresas).';
+}
