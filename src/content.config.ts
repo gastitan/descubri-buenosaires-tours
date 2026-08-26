@@ -67,6 +67,7 @@ const sobre = defineCollection({
   schema: z.object({
     nombre: z.string().min(1),
     credencial: z.string().min(1),
+    resumenHome: z.string().min(1),
     parrafos: z.array(z.string().min(1)).min(1),
     foto: z.string().regex(NOMBRE_ARCHIVO),
     fotoAlt: z.string().min(1),

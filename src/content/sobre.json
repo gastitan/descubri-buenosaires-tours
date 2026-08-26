@@ -1,11 +1,17 @@
 {
   "nombre": "Vanesa Gercehegushian",
-  "credencial": "Licenciada en Turismo",
+  "credencial": "Licenciada en Turismo y Guía de Turismo",
+  "resumenHome": "Soy Vanesa, Licenciada en Turismo y Guía de Turismo. Me gusta investigar las historias chicas que no aparecen a primera vista y compartirlas de manera simple y cercana. Porque no hace falta saber de historia para disfrutarla: a veces alcanza una anécdota para que un lugar que viste mil veces te parezca completamente distinto.",
   "parrafos": [
-    "TODO (Vanesa): contá en primera persona por qué elegiste ser guía de turismo en Buenos Aires y qué te formó en el camino. Con 2 o 3 párrafos alcanza — el resto lo maqueto yo.",
-    "TODO (Vanesa): un segundo párrafo con algo más personal — qué te gusta mostrar, qué te sorprende que la gente no sepa de la ciudad, o algo con lo que te sientas identificada."
+    "Soy Vanesa, Licenciada en Turismo y Guía de Turismo. Cuando elegí estudiar esta profesión descubrí que el turismo era mucho más que conocer lugares: es acercarse a otras historias, a otras culturas y a otras formas de mirar el mundo.",
+    "Con los años fui aprendiendo que detrás de cada lugar hay mucho más de lo que se ve a primera vista. Un edificio, una plaza, una calle o un barrio guardan historias de personas y de momentos que fueron dejando su huella en la ciudad.",
+    "Buenos Aires siempre despertó algo especial en mí. Es una ciudad que, cuanto más la conocés, más cosas tiene para contar. Incluso después de recorrer muchas veces el mismo lugar, siempre aparece un dato nuevo, una historia o una curiosidad que te permite mirarlo de otra manera.",
+    "Me gusta investigar y descubrir esas historias chicas, las que no aparecen en una primera mirada. Pero sobre todo me gusta compartirlas, y hacerlo de una manera simple y cercana, adaptándome a cada grupo y a cada persona.",
+    "Creo que una visita guiada no tiene que ser escuchar fechas y nombres. La historia puede ser entretenida y fácil de recordar: imaginar cómo era una calle hace cien años, conocer a la gente que fue parte de ella, entender por qué una plaza o un monumento terminó siendo parte de la identidad porteña.",
+    "Para mí, ser guía también es ser anfitriona: recibir a quien llega, acompañarlo y ayudarlo a descubrir la ciudad desde otra mirada.",
+    "Y hay algo que me gusta recordar siempre: no hace falta saber de historia para disfrutarla. A veces alcanza con una anécdota o una curiosidad para que un lugar que viste mil veces te parezca completamente distinto. Lo que más disfruto de esta profesión es ese momento en que alguien termina un recorrido y dice: \"no sabía que todo esto estaba acá\"."
   ],
   "foto": "vanesa.jpg",
   "fotoAlt": "Vanesa Gercehegushian, guía de Descubrí Buenos Aires Tours",
-  "pendienteRevision": true
+  "pendienteRevision": false
 }
