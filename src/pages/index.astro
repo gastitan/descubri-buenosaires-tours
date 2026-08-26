@@ -7,7 +7,15 @@ import FileteFlourish from '../components/FileteFlourish.astro';
 import TourCard from '../components/TourCard.astro';
 import ServicioCard from '../components/ServicioCard.astro';
 import FaqItem from '../components/FaqItem.astro';
-import { getSiteData, getSobreData, getServiciosData, getFaqData, getToursOrdenados } from '../lib/content';
+import SalidaEspecialCard from '../components/SalidaEspecialCard.astro';
+import {
+  getSiteData,
+  getSobreData,
+  getServiciosData,
+  getFaqData,
+  getToursOrdenados,
+  getSalidasVigentes,
+} from '../lib/content';
 import { whatsappLink, mensajeGenerico, mensajeAMedida } from '../lib/whatsapp';
 import { ui } from '../i18n/es';
 
@@ -16,6 +24,7 @@ const sobre = await getSobreData();
 const servicios = await getServiciosData();
 const preguntas = (await getFaqData()).slice(0, 4);
 const tours = await getToursOrdenados();
+const salidasVigentes = await getSalidasVigentes();
 
 const hrefAMedida = whatsappLink(site.contacto.whatsapp.numero, mensajeAMedida());
 ---
@@ -90,6 +99,19 @@ const hrefAMedida = whatsappLink(site.contacto.whatsapp.numero, mensajeAMedida()
       </div>
     </div>
   </section>
+
+  {
+    salidasVigentes.length > 0 && (
+      <section id="salidas-especiales" aria-labelledby="salidas-especiales-titulo" class="mx-auto max-w-6xl px-4 py-14 md:py-20">
+        <h2 id="salidas-especiales-titulo" class="sr-only">
+          {ui.salidas.tituloSeccionHome}
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {salidasVigentes.map((salida) => <SalidaEspecialCard salida={salida} />)}
+        </div>
+      </section>
+    )
+  }
 
   <div class="flex justify-center py-4" role="separator">
     <FileteFlourish />

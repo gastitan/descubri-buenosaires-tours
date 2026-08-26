@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "city-tour-nocturno",
+    "nombre": "City Tour Nocturno",
+    "titulo": "City Tour Nocturno",
+    "modalidad": "vehiculo",
+    "fechas": [{ "inicio": "2026-09-19T19:00:00-03:00", "nota": null }],
+    "duracion": "Entre 3 y 4 horas aprox.",
+    "barrios": [
+      "Puerto Madero",
+      "Plaza de Mayo",
+      "Obelisco y alrededores",
+      "Retiro",
+      "Recoleta",
+      "Palermo",
+      "Belgrano"
+    ],
+    "finalizaEn": "Barrio Chino",
+    "puntosEncuentro": null,
+    "precio": null,
+    "descripcionCorta": "Un recorrido nocturno en vehículo por Buenos Aires: Puerto Madero, Plaza de Mayo, Obelisco, Retiro, Recoleta, Palermo y Belgrano, con cierre en el Barrio Chino. Fecha puntual, con traslados y guía incluidos.",
+    "descripcionLarga": "De noche, Buenos Aires cambia. Los mismos edificios que de día se ven serios se iluminan distinto, y la ciudad agarra un ritmo que de tarde no tiene. Este recorrido está pensado para verla así: en vehículo, con los traslados resueltos, sin la logística de ir armando el trayecto por tu cuenta.\n\nPasamos por Puerto Madero, Plaza de Mayo, el Obelisco y sus alrededores, Retiro, Recoleta, Palermo y Belgrano, siete barrios en una sola salida, cada uno con su propia manera de verse de noche. El recorrido termina en el Barrio Chino.\n\nDura entre 3 y 4 horas aproximadamente. A diferencia de los siete recorridos a pie, que se hacen todas las semanas, este es en fecha puntual: conviene reservar apenas se confirma la próxima salida.",
+    "destacados": [
+      "Recorrido en vehículo, con los traslados incluidos",
+      "Siete barrios en una sola salida: Puerto Madero, Plaza de Mayo, Obelisco, Retiro, Recoleta, Palermo y Belgrano",
+      "Guía profesional durante todo el trayecto",
+      "Cierre del recorrido en el Barrio Chino"
+    ],
+    "incluye": ["Traslados", "Guía profesional"],
+    "noIncluye": [
+      "Comidas y bebidas",
+      "Entradas a atracciones o actividades opcionales",
+      "Todo aquello no especificado en \"Incluye\""
+    ],
+    "imagen": "city-tour-nocturno.jpg",
+    "imagenAlt": "Buenos Aires iluminada de noche, recorrido en vehículo por varios barrios de la ciudad",
+    "ogImagen": null,
+    "flyer": null,
+    "pendienteRevision": true
+  }
+]

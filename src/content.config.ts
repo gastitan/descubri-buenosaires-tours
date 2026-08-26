@@ -8,6 +8,7 @@ const HORA = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 const diaSchema = z.enum(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']);
 const dificultadSchema = z.enum(['fácil', 'moderada', 'difícil']);
+const modalidadSchema = z.enum(['vehiculo', 'a-pie', 'mixta']);
 
 const tours = defineCollection({
   loader: file('src/content/tours.json'),
@@ -113,4 +114,39 @@ const servicios = defineCollection({
   }),
 });
 
-export const collections = { site, sobre, politicas, faq, servicios, tours };
+const salidasEspeciales = defineCollection({
+  loader: file('src/content/salidas-especiales.json'),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9-]+$/),
+    nombre: z.string().min(1),
+    titulo: z.string().min(1),
+    modalidad: modalidadSchema,
+    // ISO con offset explícito (no z.coerce.date()): el instante queda absoluto
+    // sin importar la timezone de la máquina que hace el build (Cloudflare = UTC).
+    fechas: z
+      .array(
+        z.object({
+          inicio: z.string().datetime({ offset: true }),
+          nota: z.string().min(1).nullable().default(null),
+        })
+      )
+      .min(1),
+    duracion: z.string().min(1),
+    barrios: z.array(z.string().min(1)).min(1),
+    finalizaEn: z.string().min(1).nullable(),
+    puntosEncuentro: z.string().min(1).nullable(),
+    precio: z.string().min(1).nullable(),
+    descripcionCorta: z.string().min(1).max(220),
+    descripcionLarga: z.string().min(1),
+    destacados: z.array(z.string().min(1)).min(1),
+    incluye: z.array(z.string().min(1)).min(1),
+    noIncluye: z.array(z.string().min(1)),
+    imagen: z.string().regex(NOMBRE_ARCHIVO),
+    imagenAlt: z.string().min(1),
+    ogImagen: z.string().regex(NOMBRE_ARCHIVO).nullable().default(null),
+    flyer: z.string().regex(NOMBRE_ARCHIVO).nullable().default(null),
+    pendienteRevision: z.boolean().default(false),
+  }),
+});
+
+export const collections = { site, sobre, politicas, faq, servicios, tours, salidasEspeciales };

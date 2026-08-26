@@ -1,8 +1,10 @@
 import type { CollectionEntry } from 'astro:content';
 import type { getSiteData } from './content';
+import { proximaFecha } from './salidas';
 
 type Site = Awaited<ReturnType<typeof getSiteData>>;
 type Tour = CollectionEntry<'tours'>['data'];
+type SalidaEspecial = CollectionEntry<'salidasEspeciales'>['data'];
 
 export function buildTouristTripSchema(tour: Tour, site: Site, urlAbsoluta: string) {
   return {
@@ -19,6 +21,26 @@ export function buildTouristTripSchema(tour: Tour, site: Site, urlAbsoluta: stri
     ...(tour.precio && {
       offers: { '@type': 'Offer', priceCurrency: 'ARS', description: tour.precio },
     }),
+  };
+}
+
+export function buildEventoSchema(salida: SalidaEspecial, site: Site, urlAbsoluta: string) {
+  const proxima = proximaFecha(salida.fechas);
+  if (!proxima) return undefined;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: salida.nombre,
+    description: salida.descripcionCorta,
+    startDate: proxima.inicio,
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    url: urlAbsoluta,
+    organizer: {
+      '@type': 'Organization',
+      name: site.marca.nombre,
+      telephone: `+${site.contacto.whatsapp.numero}`,
+    },
   };
 }
 

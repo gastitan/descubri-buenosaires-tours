@@ -18,3 +18,9 @@ export function mensajeOtraFecha(): string {
 export function mensajeAMedida(): string {
   return 'Hola! Quería consultar por un recorrido a medida (privado, educativo o para empresas).';
 }
+
+export function mensajeSalidaEspecial(nombre: string, fechaLegible: string | null): string {
+  return fechaLegible
+    ? `Hola! Quería consultar por el ${nombre} del ${fechaLegible}.`
+    : `Hola! Quería consultar por el ${nombre} y saber cuándo es la próxima salida.`;
+}
