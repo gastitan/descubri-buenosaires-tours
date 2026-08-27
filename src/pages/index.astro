@@ -177,11 +177,7 @@ const hrefAMedida = whatsappLink(site.contacto.whatsapp.numero, mensajeAMedida()
       <p class="text-sm leading-relaxed text-blanco/80">
         {site.horarioAtencion.texto}. Respondemos en el día y coordinamos el punto de encuentro.
       </p>
-      <WhatsAppCta
-        mensaje={mensajeGenerico(site.marca.nombre)}
-        label={`WhatsApp ${site.contacto.whatsapp.numeroVisible}`}
-        class="self-start"
-      />
+      <WhatsAppCta mensaje={mensajeGenerico(site.marca.nombre)} label={ui.whatsapp.ctaGenerico} class="self-start" />
       <a
         href={site.redes.instagram.url}
         target="_blank"
