@@ -1,4 +1,5 @@
 import { getCollection, getEntry } from 'astro:content';
+import { hayProximaSalida } from './salidas';
 
 export const getSiteData = async () => (await getEntry('site', 'site'))!.data;
 export const getSobreData = async () => (await getEntry('sobre', 'sobre'))!.data;
@@ -15,4 +16,9 @@ export async function getToursOrdenados() {
       ORDEN_DIAS.indexOf(a.data.dia) - ORDEN_DIAS.indexOf(b.data.dia) ||
       a.data.hora.localeCompare(b.data.hora)
   );
+}
+
+export async function getSalidasVigentes() {
+  const salidas = await getCollection('salidasEspeciales');
+  return salidas.filter((s) => hayProximaSalida(s.data));
 }

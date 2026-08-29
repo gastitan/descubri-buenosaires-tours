@@ -6,7 +6,7 @@ interface Props {
 const { nombre, descripcion } = Astro.props;
 ---
 
-<article class="rounded-xl border border-piedra/15 bg-arena/40 p-5">
+<article class="flex flex-col gap-2 bg-blanco p-5">
   <h3 class="font-display text-lg font-semibold text-azul-tinta">{nombre}</h3>
-  <p class="mt-2 text-azul-grafito">{descripcion}</p>
+  <p class="text-azul-grafito">{descripcion}</p>
 </article>

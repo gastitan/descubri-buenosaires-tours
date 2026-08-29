@@ -1,70 +1,69 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import FileteFlourish from './FileteFlourish.astro';
+import { getSiteData } from '../lib/content';
+import { whatsappLink, mensajeTour, mensajeOtraFecha } from '../lib/whatsapp';
 import { ui } from '../i18n/es';
 
 interface Props {
   tours: CollectionEntry<'tours'>[];
 }
 const { tours } = Astro.props;
+const site = await getSiteData();
 
 const DIAS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'] as const;
+const capitalizar = (s: string) => s[0].toUpperCase() + s.slice(1);
+
 const porDia = DIAS.map((dia) => ({
   dia,
   tours: tours.filter((t) => t.data.dia === dia).sort((a, b) => a.data.hora.localeCompare(b.data.hora)),
 }));
 const diasConTours = porDia.filter((d) => d.tours.length > 0);
+const diasSinTours = porDia.filter((d) => d.tours.length === 0).map((d) => d.dia);
+
+const duracion = tours[0]?.data.duracion;
+const hrefOtraFecha = whatsappLink(site.contacto.whatsapp.numero, mensajeOtraFecha());
 ---
 
-<section id="agenda" aria-labelledby="agenda-titulo" class="mx-auto max-w-6xl px-4 py-12">
-  <h2 id="agenda-titulo" class="font-display text-2xl font-semibold text-azul-tinta md:text-3xl">
-    {ui.tours.agendaSemanal}
-  </h2>
-  <FileteFlourish class="mt-2 max-w-24" />
+<div id="agenda" class="flex flex-col gap-4 rounded-xl border border-azul-tinta/10 bg-blanco/70 p-6">
+  <div class="flex flex-col gap-1">
+    <p class="text-lg font-bold text-azul-tinta">{ui.tours.proximasSalidas}</p>
+    <p class="text-sm text-piedra">
+      {tours.length} {ui.tours.porSemana}
+      {duracion ? ` · ${duracion} ${ui.tours.cadaUna}` : ''}
+    </p>
+  </div>
 
-  <!-- Mobile: lista vertical, solo los días con recorridos -->
-  <ul class="mt-6 flex flex-col gap-3 md:hidden">
+  <div class="flex flex-col gap-2">
     {
       diasConTours.map(({ dia, tours: toursDelDia }) => (
-        <li class="rounded-lg border border-piedra/15 p-4">
-          <p class="font-display capitalize text-azul-tinta">{dia}</p>
-          <ul class="mt-2 flex flex-col gap-2">
+        <div class="grid grid-cols-[80px_1fr] items-center gap-3 rounded-lg bg-arena/60 p-3 sm:grid-cols-[96px_1fr]">
+          <p class="text-xs font-bold uppercase tracking-wide text-piedra">{dia}</p>
+          <div class="flex flex-col gap-2">
             {toursDelDia.map((tour) => (
-              <li>
-                <a href={`/tours/${tour.id}`} class="flex items-baseline justify-between gap-3 text-sm">
-                  <span class="font-semibold text-azul-grafito">{tour.data.hora} h</span>
-                  <span class="text-azul-tinta underline-offset-4 hover:underline">{tour.data.nombre}</span>
-                </a>
-              </li>
+              <a
+                href={whatsappLink(site.contacto.whatsapp.numero, mensajeTour(tour.data))}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between gap-3 rounded-md border border-azul-tinta/10 bg-blanco p-3 hover:border-azul-tinta"
+              >
+                <span class="text-sm font-semibold">{tour.data.nombre}</span>
+                <span class="text-xs text-piedra">{tour.data.hora} h</span>
+              </a>
             ))}
-          </ul>
-        </li>
-      ))
-    }
-  </ul>
-
-  <!-- Desktop: grilla de 7 columnas tipo calendario -->
-  <div class="mt-6 hidden grid-cols-7 gap-3 md:grid">
-    {
-      porDia.map(({ dia, tours: toursDelDia }) => (
-        <div class="rounded-lg border border-piedra/15 p-3">
-          <p class="font-display text-sm capitalize text-azul-tinta">{dia}</p>
-          {toursDelDia.length > 0 ? (
-            <ul class="mt-2 flex flex-col gap-2">
-              {toursDelDia.map((tour) => (
-                <li>
-                  <a href={`/tours/${tour.id}`} class="block text-sm text-azul-grafito hover:text-azul-tinta">
-                    <span class="block font-semibold">{tour.data.hora} h</span>
-                    <span>{tour.data.nombre}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p class="mt-2 text-sm text-piedra">—</p>
-          )}
+          </div>
         </div>
       ))
     }
   </div>
-</section>
+
+  {
+    diasSinTours.length > 0 && (
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-sm text-piedra">
+        <span>{diasSinTours.map(capitalizar).join(', ')}: solo privados</span>
+        <a href={hrefOtraFecha} target="_blank" rel="noopener noreferrer" class="font-semibold text-azul-tinta hover:underline">
+          {ui.tours.pedirOtraFecha}
+        </a>
+      </div>
+    )
+  }
+</div>

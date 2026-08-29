@@ -12,7 +12,7 @@ const sobre = await getSobreData();
 
 <BaseLayout
   title={ui.sobreMi.titulo}
-  description={`${sobre.nombre}, ${sobre.credencial.toLowerCase()} y guía de Descubrí Buenos Aires Tours.`}
+  description={`${sobre.nombre}, ${sobre.credencial.toLowerCase()}.`}
 >
   <article class="mx-auto max-w-3xl px-4 py-12">
     <ContentImage
@@ -30,7 +30,7 @@ const sobre = await getSobreData();
     </h1>
     <p class="mt-1 text-sm font-semibold text-azul-grafito">{sobre.credencial}</p>
 
-    <div class="prose prose-p:text-azul-grafito mt-6 max-w-none">
+    <div class="mt-6 flex flex-col gap-4 leading-relaxed text-azul-grafito">
       {sobre.parrafos.map((parrafo) => <p>{parrafo}</p>)}
     </div>
 

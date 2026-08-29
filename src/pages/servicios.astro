@@ -20,7 +20,7 @@ const servicios = await getServiciosData();
       Además de los siete recorridos de agenda fija, armo propuestas a medida según quién esté del otro lado.
     </p>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+    <div class="mt-8 flex flex-col divide-y divide-piedra/15 rounded-xl border border-piedra/15">
       {servicios.map((servicio) => (
         <ServicioCard nombre={servicio.nombre} descripcion={servicio.descripcion} />
       ))}

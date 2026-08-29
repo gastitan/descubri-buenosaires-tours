@@ -2,13 +2,15 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/img/logo.png';
 import { getSiteData } from '../lib/content';
+import { whatsappLink, mensajeGenerico } from '../lib/whatsapp';
 import { ui } from '../i18n/es';
 
 const site = await getSiteData();
+const hrefWhatsapp = whatsappLink(site.contacto.whatsapp.numero, mensajeGenerico(site.marca.nombre));
 
 const enlaces = [
-  { href: '/', label: ui.nav.inicio },
-  { href: '/#agenda', label: ui.nav.tours },
+  { href: '/#agenda', label: ui.nav.agenda },
+  { href: '/#recorridos', label: ui.nav.tours },
   { href: '/sobre-mi', label: ui.nav.sobreMi },
   { href: '/servicios', label: ui.nav.servicios },
   { href: '/preguntas-frecuentes', label: ui.nav.faq },
@@ -16,24 +18,24 @@ const enlaces = [
 ];
 ---
 
-<header class="sticky top-0 z-30 border-b border-piedra/20 bg-blanco/95 backdrop-blur">
+<header class="sticky top-0 z-30 bg-azul-tinta text-blanco">
   <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-    <a href="/" class="shrink-0">
+    <a href="/" class="shrink-0 rounded-md bg-blanco p-1.5">
       <Image
         src={logo}
         alt={site.marca.nombre}
-        width={72}
-        height={72}
+        width={133}
+        height={107}
         densities={[1, 2]}
         loading="eager"
         fetchpriority="high"
-        class="h-16 w-auto sm:h-[72px]"
+        class="h-14 w-auto sm:h-16"
       />
     </a>
 
     <details class="nav-toggle md:hidden">
       <summary
-        class="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 font-sans text-sm font-semibold text-azul-tinta"
+        class="flex cursor-pointer list-none items-center gap-1 rounded-md px-3 py-2 font-sans text-sm font-semibold text-blanco"
       >
         Menú
         <span class="nav-toggle__icono" aria-hidden="true">▾</span>
@@ -42,19 +44,28 @@ const enlaces = [
 
     <nav
       aria-label="Principal"
-      class="nav-links absolute right-4 top-full hidden w-56 flex-col gap-1 rounded-lg border border-piedra/20 bg-blanco p-2 shadow-md md:static md:right-auto md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:border-none md:bg-transparent md:p-0 md:shadow-none"
+      class="nav-links absolute right-4 top-full hidden w-56 flex-col gap-1 rounded-lg border border-piedra/20 bg-blanco p-2 text-azul-grafito shadow-md md:static md:right-auto md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:border-none md:bg-transparent md:p-0 md:text-blanco/85 md:shadow-none"
     >
       {
         enlaces.map((enlace) => (
           <a
             href={enlace.href}
-            class="rounded-md px-3 py-2 font-sans text-sm text-azul-grafito hover:text-azul-tinta md:px-0 md:py-0"
+            class="rounded-md px-3 py-2 font-sans text-sm hover:text-azul-tinta md:px-0 md:py-0 md:hover:text-blanco"
           >
             {enlace.label}
           </a>
         ))
       }
     </nav>
+
+    <a
+      href={hrefWhatsapp}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="shrink-0 whitespace-nowrap rounded-md bg-whatsapp px-4 py-2.5 font-sans text-xs font-bold text-blanco transition-colors hover:bg-whatsapp-acento hover:text-azul-tinta sm:text-sm"
+    >
+      {ui.whatsapp.ctaReservar}
+    </a>
   </div>
 </header>
 
