@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import ContentImage from './media/ContentImage.astro';
 import { proximaFecha, formatearFecha } from '../lib/salidas';
-import { ui } from '../i18n/es';
+import { ui, formatHora, formatDuracion, capitalizar } from '../i18n/es';
 
 interface Props {
   salida: CollectionEntry<'salidasEspeciales'>;
@@ -10,8 +10,8 @@ interface Props {
 const { salida } = Astro.props;
 const { data } = salida;
 const proxima = proximaFecha(data.fechas);
-const fecha = proxima ? formatearFecha(proxima.inicio, { day: 'numeric', month: 'long' }) : null;
-const hora = proxima ? formatearFecha(proxima.inicio, { hour: '2-digit', minute: '2-digit' }) : null;
+const fecha = proxima ? capitalizar(formatearFecha(proxima.inicio, { day: 'numeric', month: 'long' })) : null;
+const hora = proxima ? formatHora(formatearFecha(proxima.inicio, { hour: '2-digit', minute: '2-digit' })) : null;
 ---
 
 {
@@ -31,11 +31,11 @@ const hora = proxima ? formatearFecha(proxima.inicio, { hour: '2-digit', minute:
       <div class="flex flex-1 flex-col gap-2 p-5">
         <p class="text-xs font-bold uppercase tracking-widest text-ocre">{ui.salidas.eyebrow}</p>
         <p class="font-display text-lg font-semibold">{data.nombre}</p>
-        <p class="capitalize text-sm text-ocre">
-          {fecha} · {hora} h
+        <p class="text-sm text-ocre">
+          {fecha} · {hora}
         </p>
         <p class="text-sm text-arena/80">
-          {data.duracion} · {data.barrios.join(', ')}
+          {formatDuracion(data.duracionMin, data.duracionMax)} · {data.barrios.join(', ')}
         </p>
         <span class="mt-auto pt-2 text-sm font-semibold text-ocre underline-offset-4 group-hover:underline">
           {ui.salidas.verDetalle}

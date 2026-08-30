@@ -7,10 +7,10 @@ import WhatsAppCta from '../../components/whatsapp/WhatsAppCta.astro';
 import { getToursOrdenados } from '../../lib/content';
 import { mensajeTour } from '../../lib/whatsapp';
 import { textoPuntoEncuentro, textoPrecio } from '../../lib/textos';
-import { buildTouristTripSchema } from '../../lib/schema';
+import { buildTouristTripSchema, buildBreadcrumbSchema } from '../../lib/schema';
 import { getSiteData } from '../../lib/content';
 import { resolveImage } from '../../lib/images';
-import { ui } from '../../i18n/es';
+import { ui, formatDiaHora, formatDuracion } from '../../i18n/es';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
@@ -27,10 +27,15 @@ const site = await getSiteData();
 const otrosTours = (await getToursOrdenados()).filter((t) => t.id !== tour.id);
 const mensaje = mensajeTour(data);
 const urlAbsoluta = new URL(`/tours/${tour.id}`, Astro.site).toString();
-const jsonLdExtra = buildTouristTripSchema(data, site, urlAbsoluta);
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { nombre: 'Inicio', url: new URL('/', Astro.site).toString() },
+  { nombre: 'Recorridos', url: new URL('/#recorridos', Astro.site).toString() },
+  { nombre: data.titulo, url: urlAbsoluta },
+]);
+const jsonLdExtra = [buildTouristTripSchema(data, site, urlAbsoluta), breadcrumbSchema];
 
 const assetFoto = resolveImage(data.imagen, 'tours');
-const ogImage = assetFoto ? (await getImage({ src: assetFoto })).src : undefined;
+const ogImage = assetFoto ? (await getImage({ src: assetFoto, width: 1200, height: 630 })).src : undefined;
 ---
 
 <BaseLayout
@@ -58,11 +63,11 @@ const ogImage = assetFoto ? (await getImage({ src: assetFoto })).src : undefined
     <dl class="mt-4 grid grid-cols-2 gap-4 rounded-xl bg-arena/40 p-4 text-sm sm:grid-cols-4">
       <div>
         <dt class="font-semibold text-azul-tinta">Día y hora</dt>
-        <dd class="capitalize text-azul-grafito">{data.dia} · {data.hora} h</dd>
+        <dd class="text-azul-grafito">{formatDiaHora(data.dia, data.hora)}</dd>
       </div>
       <div>
         <dt class="font-semibold text-azul-tinta">{ui.tours.duracion}</dt>
-        <dd class="text-azul-grafito">{data.duracion}</dd>
+        <dd class="text-azul-grafito">{formatDuracion(data.duracionMin, data.duracionMax)}</dd>
       </div>
       <div>
         <dt class="font-semibold text-azul-tinta">{ui.tours.dificultad}</dt>

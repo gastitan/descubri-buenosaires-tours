@@ -5,7 +5,8 @@
     "titulo": "City Tour Nocturno",
     "modalidad": "vehiculo",
     "fechas": [{ "inicio": "2026-09-19T19:00:00-03:00", "nota": null }],
-    "duracion": "Entre 3 y 4 horas aprox.",
+    "duracionMin": 180,
+    "duracionMax": 240,
     "barrios": [
       "Puerto Madero",
       "Plaza de Mayo",

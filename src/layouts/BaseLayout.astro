@@ -7,6 +7,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import WhatsAppFloating from '../components/whatsapp/WhatsAppFloating.astro';
 import logo from '../assets/img/logo.png';
+import hero from '../assets/img/hero.png';
 import { getSiteData } from '../lib/content';
 import { buildLocalBusinessSchema } from '../lib/schema';
 
@@ -14,14 +15,17 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  noindex?: boolean;
   mensajeWhatsapp?: string;
-  jsonLdExtra?: Record<string, unknown>;
+  jsonLdExtra?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { title, description, image, mensajeWhatsapp, jsonLdExtra } = Astro.props;
+const { title, description, image, noindex, mensajeWhatsapp, jsonLdExtra } = Astro.props;
 
 const site = await getSiteData();
 const logoUrl = new URL((await getImage({ src: logo })).src, Astro.site).toString();
 const localBusinessSchema = buildLocalBusinessSchema(site, logoUrl);
+const ogImageFallback = (await getImage({ src: hero, width: 1200, height: 630 })).src;
+const jsonLdBlocks = jsonLdExtra ? (Array.isArray(jsonLdExtra) ? jsonLdExtra : [jsonLdExtra]) : [];
 ---
 
 <html lang="es-AR">
@@ -30,9 +34,9 @@ const localBusinessSchema = buildLocalBusinessSchema(site, logoUrl);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <SeoHead title={title} description={description} image={image} />
+    <SeoHead title={title} description={description} image={image ?? ogImageFallback} noindex={noindex} />
     <JsonLd data={localBusinessSchema} />
-    {jsonLdExtra && <JsonLd data={jsonLdExtra} />}
+    {jsonLdBlocks.map((bloque) => <JsonLd data={bloque} />)}
   </head>
   <body class="flex min-h-screen flex-col">
     <a

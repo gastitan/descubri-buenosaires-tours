@@ -17,6 +17,7 @@ export function proximaFecha(fechas: Fecha[]): Fecha | null {
 export function formatearFecha(inicio: string, opts: Intl.DateTimeFormatOptions = {}): string {
   return new Intl.DateTimeFormat('es-AR', {
     timeZone: 'America/Argentina/Buenos_Aires',
+    hourCycle: 'h23',
     ...opts,
   }).format(new Date(inicio));
 }

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/img/logo.png';
+import InstagramIcon from './icons/InstagramIcon.astro';
 import { getSiteData } from '../lib/content';
 import { whatsappLink, mensajeGenerico } from '../lib/whatsapp';
 import { ui } from '../i18n/es';
@@ -33,7 +34,8 @@ const hrefWhatsapp = whatsappLink(site.contacto.whatsapp.numero, mensajeGenerico
   <div class="border-t border-piedra/15 px-4 py-4 text-center text-xs text-piedra">
     <p>© {new Date().getFullYear()} {site.marca.nombre} — {site.marca.responsable}</p>
     <p class="mt-1">
-      <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="hover:text-azul-tinta">
+      <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-azul-tinta">
+        <InstagramIcon class="h-3.5 w-3.5" />
         {ui.footer.instagram}
       </a>
       {site.redes.facebook.url && (

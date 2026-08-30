@@ -3,7 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { ui } from '../i18n/es';
 ---
 
-<BaseLayout title={ui.error404.titulo} description="La página que buscás no existe o cambió de dirección.">
+<BaseLayout
+  title={ui.error404.titulo}
+  description="La página que buscás no existe o cambió de dirección."
+  noindex
+>
   <section class="mx-auto max-w-lg px-4 py-24 text-center">
     <p class="font-display text-6xl font-semibold text-azul-tinta">404</p>
     <h1 class="mt-4 font-display text-2xl font-semibold text-azul-tinta">{ui.error404.titulo}</h1>

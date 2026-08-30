@@ -8,6 +8,7 @@ import TourCard from '../components/TourCard.astro';
 import ServicioCard from '../components/ServicioCard.astro';
 import FaqItem from '../components/FaqItem.astro';
 import SalidaEspecialCard from '../components/SalidaEspecialCard.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
 import {
   getSiteData,
   getSobreData,
@@ -30,7 +31,7 @@ const hrefAMedida = whatsappLink(site.contacto.whatsapp.numero, mensajeAMedida()
 ---
 
 <BaseLayout
-  title={site.marca.nombre}
+  title="Recorridos guiados a pie por Buenos Aires"
   description={`${site.marca.lema} — recorridos guiados a pie por Buenos Aires, con agenda semanal fija.`}
 >
   <section class="relative overflow-hidden bg-arena">
@@ -182,9 +183,10 @@ const hrefAMedida = whatsappLink(site.contacto.whatsapp.numero, mensajeAMedida()
         href={site.redes.instagram.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-sm text-blanco/75 hover:text-blanco"
+        class="inline-flex items-center gap-1.5 text-sm text-blanco/75 hover:text-blanco"
       >
-        Instagram {site.redes.instagram.usuario}
+        <InstagramIcon class="h-4 w-4" />
+        {site.redes.instagram.usuario}
       </a>
     </div>
   </section>

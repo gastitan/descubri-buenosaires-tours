@@ -44,6 +44,31 @@ export function buildEventoSchema(salida: SalidaEspecial, site: Site, urlAbsolut
   };
 }
 
+export function buildBreadcrumbSchema(items: { nombre: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, indice) => ({
+      '@type': 'ListItem',
+      position: indice + 1,
+      name: item.nombre,
+      item: item.url,
+    })),
+  };
+}
+
+export function buildFaqPageSchema(preguntas: { pregunta: string; respuesta: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: preguntas.map((p) => ({
+      '@type': 'Question',
+      name: p.pregunta,
+      acceptedAnswer: { '@type': 'Answer', text: p.respuesta },
+    })),
+  };
+}
+
 export function buildLocalBusinessSchema(site: Site, logoUrl?: string) {
   return {
     '@context': 'https://schema.org',

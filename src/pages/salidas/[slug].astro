@@ -8,9 +8,9 @@ import { getSiteData } from '../../lib/content';
 import { mensajeSalidaEspecial } from '../../lib/whatsapp';
 import { textoPrecio } from '../../lib/textos';
 import { proximasFechas, proximaFecha, formatearFecha } from '../../lib/salidas';
-import { buildEventoSchema } from '../../lib/schema';
+import { buildEventoSchema, buildBreadcrumbSchema } from '../../lib/schema';
 import { resolveImage } from '../../lib/images';
-import { ui } from '../../i18n/es';
+import { ui, formatHora, formatDuracion, capitalizar } from '../../i18n/es';
 
 export async function getStaticPaths() {
   const salidas = await getCollection('salidasEspeciales');
@@ -26,15 +26,21 @@ const { data } = salida;
 const site = await getSiteData();
 const proxima = proximaFecha(data.fechas);
 const otrasFechas = proximasFechas(data.fechas).slice(1);
+// En minúscula: se reutiliza tal cual en el mensaje de WhatsApp ("del viernes, 19 de..."), texto corrido.
 const fechaLegible = proxima ? formatearFecha(proxima.inicio, { weekday: 'long', day: 'numeric', month: 'long' }) : null;
-const horaLegible = proxima ? formatearFecha(proxima.inicio, { hour: '2-digit', minute: '2-digit' }) : null;
+const horaLegible = proxima ? formatHora(formatearFecha(proxima.inicio, { hour: '2-digit', minute: '2-digit' })) : null;
 const mensaje = mensajeSalidaEspecial(data.nombre, fechaLegible);
 
 const urlAbsoluta = new URL(`/salidas/${salida.id}`, Astro.site).toString();
-const jsonLdExtra = buildEventoSchema(data, site, urlAbsoluta);
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { nombre: 'Inicio', url: new URL('/', Astro.site).toString() },
+  { nombre: data.titulo, url: urlAbsoluta },
+]);
+const eventoSchema = buildEventoSchema(data, site, urlAbsoluta);
+const jsonLdExtra = eventoSchema ? [eventoSchema, breadcrumbSchema] : breadcrumbSchema;
 
 const assetOg = data.ogImagen ? resolveImage(data.ogImagen, 'salidas') : undefined;
-const ogImage = assetOg ? (await getImage({ src: assetOg })).src : undefined;
+const ogImage = assetOg ? (await getImage({ src: assetOg, width: 1200, height: 630 })).src : undefined;
 
 const assetFlyer = data.flyer ? resolveImage(data.flyer, 'salidas') : undefined;
 const flyerUrl = assetFlyer ? (await getImage({ src: assetFlyer })).src : undefined;
@@ -69,8 +75,8 @@ const labelWhatsapp = proxima ? ui.whatsapp.ctaTour : ui.whatsapp.ctaGenerico;
         proxima ? (
           <div class="mt-6 inline-flex flex-col gap-1 rounded-xl border border-ocre/30 bg-blanco/5 p-4">
             <p class="text-xs font-bold uppercase tracking-wide text-ocre">{ui.salidas.inicioDelTour}</p>
-            <p class="capitalize text-lg font-semibold">
-              {fechaLegible} · {horaLegible} h
+            <p class="text-lg font-semibold">
+              {fechaLegible && capitalizar(fechaLegible)} · {horaLegible}
             </p>
           </div>
         ) : (
@@ -114,7 +120,7 @@ const labelWhatsapp = proxima ? ui.whatsapp.ctaTour : ui.whatsapp.ctaGenerico;
       <dl class="mt-10 grid grid-cols-2 gap-4 rounded-xl bg-blanco/5 p-4 text-sm sm:grid-cols-4">
         <div>
           <dt class="font-semibold text-ocre">{ui.salidas.duracion}</dt>
-          <dd class="text-arena/90">{data.duracion}</dd>
+          <dd class="text-arena/90">{formatDuracion(data.duracionMin, data.duracionMax)}</dd>
         </div>
         <div>
           <dt class="font-semibold text-ocre">{ui.salidas.modalidad}</dt>
@@ -166,10 +172,10 @@ const labelWhatsapp = proxima ? ui.whatsapp.ctaTour : ui.whatsapp.ctaGenerico;
             <ul class="mt-3 flex flex-col gap-2">
               {otrasFechas.map((f) => (
                 <li class="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-blanco/5 px-4 py-2">
-                  <span class="capitalize text-arena/90">
-                    {formatearFecha(f.inicio, { weekday: 'long', day: 'numeric', month: 'long' })}
+                  <span class="text-arena/90">
+                    {capitalizar(formatearFecha(f.inicio, { weekday: 'long', day: 'numeric', month: 'long' }))}
                   </span>
-                  <span class="text-sm text-arena/70">{formatearFecha(f.inicio, { hour: '2-digit', minute: '2-digit' })} h</span>
+                  <span class="text-sm text-arena/70">{formatHora(formatearFecha(f.inicio, { hour: '2-digit', minute: '2-digit' }))}</span>
                   {f.nota && <span class="w-full text-xs text-arena/60">{f.nota}</span>}
                 </li>
               ))}

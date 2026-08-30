@@ -4,6 +4,29 @@
  * en.ts/pt.ts el día de mañana sea aditivo, sin tener que rastrear literales
  * dispersos por los componentes.
  */
+/** Primera letra en mayúscula, sin tocar el resto — para labels aislados (día, fecha), nunca CSS `capitalize`. */
+export const capitalizar = (texto: string): string => `${texto.charAt(0).toUpperCase()}${texto.slice(1)}`;
+
+/** Hora tal como se guarda ("HH:MM"): único punto de cambio si el criterio cambia o se suma inglés. */
+export const formatHora = (hora: string): string => hora;
+
+/** Arma "2 h", "1 h 30 min" o "1 h 30 min a 2 h" a partir de minutos. */
+export function formatDuracion(min: number, max?: number): string {
+  const texto = (totalMin: number) => {
+    const horas = Math.floor(totalMin / 60);
+    const minutos = totalMin % 60;
+    if (horas === 0) return `${minutos} min`;
+    if (minutos === 0) return `${horas} h`;
+    return `${horas} h ${minutos} min`;
+  };
+  return max !== undefined && max !== min ? `${texto(min)} a ${texto(max)}` : texto(min);
+}
+
+/** "Miércoles · 11:00": día capitalizado como label aislado, separador centralizado acá. */
+export function formatDiaHora(dia: string, hora: string): string {
+  return `${capitalizar(dia)} · ${formatHora(hora)}`;
+}
+
 export const ui = {
   nav: {
     agenda: 'Agenda',

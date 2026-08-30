@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { getSiteData } from '../lib/content';
 import { whatsappLink, mensajeTour, mensajeOtraFecha } from '../lib/whatsapp';
-import { ui } from '../i18n/es';
+import { ui, formatHora, formatDuracion, capitalizar } from '../i18n/es';
 
 interface Props {
   tours: CollectionEntry<'tours'>[];
@@ -11,7 +11,6 @@ const { tours } = Astro.props;
 const site = await getSiteData();
 
 const DIAS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'] as const;
-const capitalizar = (s: string) => s[0].toUpperCase() + s.slice(1);
 
 const porDia = DIAS.map((dia) => ({
   dia,
@@ -20,7 +19,7 @@ const porDia = DIAS.map((dia) => ({
 const diasConTours = porDia.filter((d) => d.tours.length > 0);
 const diasSinTours = porDia.filter((d) => d.tours.length === 0).map((d) => d.dia);
 
-const duracion = tours[0]?.data.duracion;
+const primerTour = tours[0]?.data;
 const hrefOtraFecha = whatsappLink(site.contacto.whatsapp.numero, mensajeOtraFecha());
 ---
 
@@ -29,7 +28,7 @@ const hrefOtraFecha = whatsappLink(site.contacto.whatsapp.numero, mensajeOtraFec
     <p class="text-lg font-bold text-azul-tinta">{ui.tours.proximasSalidas}</p>
     <p class="text-sm text-piedra">
       {tours.length} {ui.tours.porSemana}
-      {duracion ? ` · ${duracion} ${ui.tours.cadaUna}` : ''}
+      {primerTour ? ` · ${formatDuracion(primerTour.duracionMin, primerTour.duracionMax)} ${ui.tours.cadaUna}` : ''}
     </p>
   </div>
 
@@ -47,7 +46,7 @@ const hrefOtraFecha = whatsappLink(site.contacto.whatsapp.numero, mensajeOtraFec
                 class="flex items-center justify-between gap-3 rounded-md border border-azul-tinta/10 bg-blanco p-3 hover:border-azul-tinta"
               >
                 <span class="text-sm font-semibold">{tour.data.nombre}</span>
-                <span class="text-xs text-piedra">{tour.data.hora} h</span>
+                <span class="text-xs text-piedra">{formatHora(tour.data.hora)}</span>
               </a>
             ))}
           </div>

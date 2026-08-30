@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppCta from '../components/whatsapp/WhatsAppCta.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
 import { getSiteData } from '../lib/content';
 import { mensajeGenerico } from '../lib/whatsapp';
 import { ui } from '../i18n/es';
@@ -10,7 +11,7 @@ const site = await getSiteData();
 
 <BaseLayout
   title={ui.contacto.titulo}
-  description={`Escribile a ${site.marca.nombre} por WhatsApp, o seguila en Instagram y Facebook.`}
+  description={`Escribile a ${site.marca.nombre} por WhatsApp, o seguila en Instagram.`}
 >
   <section class="mx-auto max-w-2xl px-4 py-12 text-center">
     <h1 class="font-display text-3xl font-semibold text-azul-tinta md:text-4xl">{ui.contacto.titulo}</h1>
@@ -30,19 +31,18 @@ const site = await getSiteData();
       <h2 class="font-display text-xl font-semibold text-azul-tinta">{ui.contacto.redes}</h2>
       <ul class="mt-4 flex flex-col items-center gap-3 text-azul-grafito">
         <li>
-          <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="font-semibold text-azul-tinta underline-offset-4 hover:underline">
-            Instagram: {site.redes.instagram.usuario}
+          <a href={site.redes.instagram.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-azul-tinta underline-offset-4 hover:underline">
+            <InstagramIcon class="h-5 w-5" />
+            {site.redes.instagram.usuario}
           </a>
         </li>
-        <li>
-          {site.redes.facebook.url ? (
+        {site.redes.facebook.url && (
+          <li>
             <a href={site.redes.facebook.url} target="_blank" rel="noopener noreferrer" class="font-semibold text-azul-tinta underline-offset-4 hover:underline">
               Facebook: {site.redes.facebook.nombre}
             </a>
-          ) : (
-            <span>Facebook: {site.redes.facebook.nombre} (enlace pendiente — TODO)</span>
-          )}
-        </li>
+          </li>
+        )}
       </ul>
     </div>
   </section>

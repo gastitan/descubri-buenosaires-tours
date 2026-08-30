@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import ContentImage from './media/ContentImage.astro';
-import { ui } from '../i18n/es';
+import { ui, formatDiaHora } from '../i18n/es';
 
 interface Props {
   tour: CollectionEntry<'tours'>;
@@ -24,7 +24,7 @@ const { data } = tour;
   />
   <div class="flex flex-1 flex-col gap-2 p-4">
     <p class="font-display text-lg font-semibold text-azul-tinta">{data.nombre}</p>
-    <p class="text-sm capitalize text-azul-grafito">{data.dia} · {data.hora} h</p>
+    <p class="text-sm text-azul-grafito">{formatDiaHora(data.dia, data.hora)}</p>
     <p class="text-azul-grafito">{data.descripcionCorta}</p>
     <span class="mt-auto pt-2 text-sm font-semibold text-azul-tinta underline-offset-4 group-hover:underline">
       {ui.tours.verRecorrido}
