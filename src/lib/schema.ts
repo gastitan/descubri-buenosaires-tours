@@ -79,6 +79,13 @@ export function buildLocalBusinessSchema(site: Site, logoUrl?: string) {
     telephone: `+${site.contacto.whatsapp.numero}`,
     url: `https://${site.dominio}/`,
     ...(logoUrl && { logo: logoUrl, image: logoUrl }),
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Buenos Aires',
+      addressRegion: 'CABA',
+      addressCountry: 'AR',
+    },
+    priceRange: '$',
     areaServed: 'Ciudad Autónoma de Buenos Aires, Argentina',
     sameAs: [site.redes.instagram.url, site.redes.facebook.url].filter(Boolean),
     openingHoursSpecification: {

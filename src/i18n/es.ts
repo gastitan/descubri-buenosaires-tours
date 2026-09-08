@@ -83,7 +83,7 @@ export const ui = {
   hero: {
     eyebrow: 'Agenda fija · salidas todas las semanas',
     titulo: 'Elegí el día. Nos vemos en la esquina.',
-    subtitulo: 'Siete recorridos a pie por Buenos Aires con guía habilitada, siempre el mismo día y horario. Cada rincón tiene una historia.',
+    subtitulo: 'Siete recorridos de turismo a pie por la ciudad de Buenos Aires, con guía habilitada, siempre el mismo día y horario.',
     verRecorridos: 'Ver los recorridos',
     confianza: ['+800 recorridos realizados', 'Grupos chicos', 'Español e inglés'],
   },
